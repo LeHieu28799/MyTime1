@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menuAdd"
+        app:showAsAction="never"
+        android:title="Thêm"/>
+
+    <item
+        android:id="@+id/seeAll"
+        app:showAsAction="never"
+        android:title="Hiện tất cả"/>
+
+    <item
+        android:id="@+id/dayFilter"
+        app:showAsAction="never"
+        android:title="Lọc theo ngày"/>
+
+    <item
+        android:id="@+id/order"
+        app:showAsAction="never"
+        android:title="Sắp xếp" >
+
+        <menu>
+            <item
+                android:id="@+id/dateASC"
+                android:title="Ngày tăng dần"
+                app:showAsAction="never"/>
+
+            <item
+                android:id="@+id/dateDESC"
+                android:title="Ngày giảm dần"
+                app:showAsAction="never"/>
+        </menu>
+
+    </item>
+
+</menu>

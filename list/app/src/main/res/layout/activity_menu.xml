@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/menubg"
+    tools:context=".mainmenu.MenuActivity">
+
+
+    <Button
+        android:id="@+id/btn_menu_list"
+        android:layout_width="238dp"
+        android:layout_height="82dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="72dp"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/ic_list"
+        android:text="Danh Sách"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_menu_cal"
+        android:layout_width="236dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="56dp"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/ic_cal"
+        android:text="Lịch"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_menu_list" />
+
+
+</android.support.constraint.ConstraintLayout>
