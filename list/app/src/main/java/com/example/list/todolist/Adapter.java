@@ -68,7 +68,12 @@ public class Adapter extends BaseAdapter {
 
         viewHolder.txt.setText(event.getName());
         viewHolder.date.setText(event.getDate());
-
+        viewHolder.edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.editEvent(event.getName(), event.getId(), event.getDate());
+            }
+        });
         viewHolder.del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

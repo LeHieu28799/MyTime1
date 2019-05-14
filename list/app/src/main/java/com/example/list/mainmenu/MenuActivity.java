@@ -7,12 +7,13 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.list.R;
+import com.example.list.alarm.AlarmMainActivity;
 import com.example.list.calendar.CalendarActivity;
 import com.example.list.todolist.MainActivity;
 
 public class MenuActivity extends AppCompatActivity {
 
-    private Button buttonList, buttonCal;
+    private Button buttonList, buttonCal, buttonAlarm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,7 @@ public class MenuActivity extends AppCompatActivity {
 
         buttonList = (Button) findViewById(R.id.btn_menu_list);
         buttonCal = (Button) findViewById(R.id.btn_menu_cal);
+        buttonAlarm = (Button) findViewById(R.id.btn_menu_alarm);
 
         buttonList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +36,14 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuActivity.this, CalendarActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonAlarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, AlarmMainActivity.class);
                 startActivity(intent);
             }
         });

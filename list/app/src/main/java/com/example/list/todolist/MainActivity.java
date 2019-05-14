@@ -13,11 +13,13 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.list.R;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -76,6 +78,69 @@ public class MainActivity extends AppCompatActivity {
             ShowListDayFilter(filter_day);
         } else ShowList();
 
+    }
+    /*
+     Chinh sua event
+     */
+    public  void editEvent(final String evName, final int id, String evDate) {
+
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_add);
+
+        TextView textView = (TextView) dialog.findViewById(R.id.textAdding);
+        textView.setText("Sửa");
+
+        final EditText editText = (EditText) dialog.findViewById(R.id.editTextEName);
+        Button btnOk = (Button) dialog.findViewById(R.id.btnConfirmAdd);
+        Button btnCancel = (Button) dialog.findViewById(R.id.btnCancelAdd);
+        final DatePicker datePicker = (DatePicker) dialog.findViewById(R.id.datePicker);
+
+        editText.setText(evName);
+
+        StringTokenizer stringTokenizer = new StringTokenizer(evDate, "/");
+        int oldDay = Integer.parseInt(stringTokenizer.nextToken());
+        int oldMonth = Integer.parseInt(stringTokenizer.nextToken());
+        int oldYear = Integer.parseInt(stringTokenizer.nextToken());
+        datePicker.updateDate(oldYear, oldMonth - 1, oldDay);
+
+        dialog.show();
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newEvent = editText.getText().toString();
+
+                int evDay = datePicker.getDayOfMonth();
+                int evMonth = datePicker.getMonth() + 1;
+                int evYear = datePicker.getYear();
+                String newEvDate = evDay + "/" + evMonth + "/" + evYear;
+
+                String newDateFormated = formatDay(evDay, evMonth, evYear);
+
+                if(newEvent != "" && !newEvent.isEmpty()) {
+                    database.QueryData("UPDATE ToDoList " +
+                                            "SET Event = '" + newEvent + "', Date = '" + newEvDate + "', DateFormat = '" + newDateFormated + "' " +
+                                            "WHERE Id = '"+ id +"'");
+                    Toast.makeText(MainActivity.this, "Đã sửa "+ evName+ " thành " + newEvent + " ngày " + newEvDate, Toast.LENGTH_SHORT).show();
+                    dialog.cancel();
+
+                    if(filter_status == 1) {
+                        ShowListDayFilter(filter_day);
+                    } else if(order_status == 1 || order_status == 2) {
+                        ShowListDayOrder(order_status);
+                    } else ShowList();
+
+                } else dialog.cancel();
+            }
+        });
     }
 
     @Override
@@ -213,6 +278,9 @@ public class MainActivity extends AppCompatActivity {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_add);
 
+        TextView textView = (TextView) dialog.findViewById(R.id.textAdding);
+        textView.setText("Thêm");
+
         final EditText editText = (EditText) dialog.findViewById(R.id.editTextEName);
         Button btnOk = (Button) dialog.findViewById(R.id.btnConfirmAdd);
         Button btnCancel = (Button) dialog.findViewById(R.id.btnCancelAdd);
@@ -240,7 +308,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(evName != "" && !evName.isEmpty()) {
                     database.QueryData("INSERT INTO ToDoList VALUES(null, '" + evName + "', '" + evDate + "', '" + dateFormated + "' )");
-                    Toast.makeText(MainActivity.this, "Đã thêm" + evName + " " + dateFormated, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Đã thêm " + evName + " " + dateFormated, Toast.LENGTH_SHORT).show();
                     dialog.cancel();
 
                     if(filter_status == 1) {

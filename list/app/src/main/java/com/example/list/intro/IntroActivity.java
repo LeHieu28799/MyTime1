@@ -28,7 +28,7 @@ public class IntroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
-
+        getSupportActionBar().hide();
         database = new Database(this, "ToDoList.sqlite", null, 1);
         database.QueryData("CREATE TABLE IF NOT EXISTS ToDoList(Id INTEGER PRIMARY KEY AUTOINCREMENT, Event VARCHAR(100), Date TEXT, DateFormat TEXT)");
 
